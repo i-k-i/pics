@@ -1,0 +1,22 @@
+from django.db import models
+from django.contrib.auth.models import User
+
+
+def upload_to(istance, filename):
+    return 'images/users/{0}/{1}'.format(isinstance.user.id, filename)
+
+
+class Picture(models.Model):
+    title = models.CharField(max_length=256)
+    uploaded = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to=upload_to)    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploaded_pictures' )
+
+    def __str__(self):
+        return  self.title or self.image
+
+class Note(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='created_notes')
+    picture = models.ForeignKey(Picture, on_delete = models.CASCADE, related_name='notes')
+    text = models.TextField()
+

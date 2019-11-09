@@ -1,5 +1,6 @@
 Django==2.2.7
 psycopg2==2.8.4
+Pillow==6.2.1
 
 # celery==4.3.0
 # amqp==2.5.1
