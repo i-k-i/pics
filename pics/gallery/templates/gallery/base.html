@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+
+    </head>
+    <body>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+        <div id="top-bar">
+            <ul>
+            {% if request.user.is_authenticated %}
+                <li>{{ user }}</li>
+                <li><a href="{% url 'gallery:logout' %}">Logout</a></li>
+                <li><a href="{% url 'gallery:send_as_email' %}">Send me this gallery</a></li>
+            {%else%}
+                <li><a href="{% url "gallery:login" %}">login</a></li>
+            {% endif %}
+            </ul>
+        </div>
+    </body>
+</html>
+        
