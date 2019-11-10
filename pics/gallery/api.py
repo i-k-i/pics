@@ -11,3 +11,12 @@ class PictureList(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['user']
 
+
+class PictureDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Picture.objects.all()
+    serializer_class = PictureSerializer
+
+    def put(self, request, *args, **kwargs):
+        import ipdb; ipdb.set_trace()
+        # return self.update(request, *args, **kwargs)
+

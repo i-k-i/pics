@@ -13,5 +13,6 @@ urlpatterns = [
 
     path('send_gallery/', views.send_gallery_to_email, name = 'send_gallery'),
 
-    path('api/pictures/', api.PictureList.as_view()),
+    path('api/pictures/list', api.PictureList.as_view()),
+    path('api/pictures/<int:pk>/', api.PictureDetail.as_view()),
 ]
