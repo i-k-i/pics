@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, api
 from django.contrib.auth import views as auth_views
 
 app_name = 'gallery'
@@ -11,5 +11,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name = 'logout'),
     path('register/', views.register, name = 'register'),
 
-    path('send_gallery/', views.send_gallery_to_email, name = 'send_gallery')
+    path('send_gallery/', views.send_gallery_to_email, name = 'send_gallery'),
+
+    path('api/pictures/', api.PictureList.as_view()),
 ]

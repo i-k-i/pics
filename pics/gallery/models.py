@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-def upload_to(istance, filename):
-    return 'images/users/{0}/{1}'.format(isinstance.user.id, filename)
+def upload_to(instance, filename):
+    return 'images/users/{0}/{1}'.format(instance.user_id, filename)
 
 
 class Picture(models.Model):

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gallery.apps.GalleryConfig',
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,9 @@ STATIC_URL = '/static/'
 # Auth redirect
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# DRF
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
