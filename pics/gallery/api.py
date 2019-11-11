@@ -16,7 +16,8 @@ class PictureDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Picture.objects.all()
     serializer_class = PictureSerializer
 
-    def put(self, request, *args, **kwargs):
-        import ipdb; ipdb.set_trace()
-        # return self.update(request, *args, **kwargs)
+
+    # def put(self, request, *args, **kwargs):
+    #     import ipdb; ipdb.set_trace()
+    #     # return self.update(request, *args, **kwargs)
 

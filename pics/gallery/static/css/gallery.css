@@ -1,0 +1,14 @@
+#pictiresContainer{
+    margin: 0px auto;
+    padding: 60px;
+    max-width: 1200px;
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+
+.image img {
+    max-width: 50%;
+}
+  

@@ -8,19 +8,16 @@ class NoteSerializer(serializers.ModelSerializer):
 
 class PictureSerializer(serializers.ModelSerializer):
     note = serializers.SerializerMethodField('get_note')
+    user = serializers.StringRelatedField()
 
     def get_note(self, picture):
         query_set = models.Note.objects.filter(
             user_id = self.context['request'].user.id,
             picture = picture
-        )
-        serializer = NoteSerializer(instance = query_set, many = True)
+        ).last()
+        serializer = NoteSerializer(instance = query_set)
         return serializer.data
-
-    def update(self, *args, **kwargs):
-
-        import ipdb; ipdb.set_trace()
 
     class Meta:
         model = models.Picture
-        fields = ('id', 'note')
+        fields = ('id', 'image_path', 'note', 'user', 'title')

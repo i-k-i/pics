@@ -5,15 +5,14 @@ from django.contrib.auth.models import User
 def upload_to(instance, filename):
     return 'images/users/{0}/{1}'.format(instance.user_id, filename)
 
-
 class Picture(models.Model):
     title = models.CharField(max_length=256)
     uploaded = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to=upload_to)    
+    image_path = models.ImageField(upload_to=upload_to)    
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploaded_pictures' )
 
     def __str__(self):
-        return  self.title or self.image
+        return  self.title or self.image_path
 
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='created_notes')
