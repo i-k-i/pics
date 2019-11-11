@@ -19,4 +19,11 @@ class Note(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='created_notes')
     picture = models.ForeignKey(Picture, on_delete = models.CASCADE, related_name='notes')
     text = models.TextField()
+    ctime = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('user', 'picture')
+
+
+    def __str__(self):
+        return '{0}:{1}:{2}'.format(self.user_id, self.picture_id, self.text[:57])
