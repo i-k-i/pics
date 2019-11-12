@@ -4,11 +4,11 @@
 {% block title %}Pictures{% endblock %}
 {% block content %}
     <h1>Some Pictures</h1>
-    <form id="filter_form">
-        My <input type="checkbox" name="user">
+    <div id="filter_form">
+        User_id <input type="text" name="user">
         Commented <input type="checkbox" name="commented">
         <input id="apply_filter" type="button" value="Filter">
-    </form>
+    </div>
 {% if request.user.is_authenticated %}
     <form action="{% url 'gallery:pics_list'%}" method="post" enctype="multipart/form-data" id="upload_form">
         {% csrf_token %}

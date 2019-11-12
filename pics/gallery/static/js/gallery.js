@@ -60,9 +60,14 @@ $('.upload_btn').on('click', function() {
   })
 });
 
-$('.delete_img').click(function(){
-  console.log(123)
-});
+// $('.delete_img').click(function(){
+//   console.log(123)
+// });
+
+
+$('#apply_filter').on('click', function(){
+  
+})
 
 $(document).ready(function(){
   reload_gallery()
