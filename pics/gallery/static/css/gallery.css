@@ -8,7 +8,11 @@
 }
 
 
-.image img {
+.picrureBox img {
     max-width: 50%;
 }
-  
+
+.picrureBox {
+    max-width: 50%;
+    border:solid
+}

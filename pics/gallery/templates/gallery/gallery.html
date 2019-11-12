@@ -10,7 +10,7 @@
         <input id="apply_filter" type="button" value="Filter">
     </form>
 {% if request.user.is_authenticated %}
-    <form action="{% url 'gallery:pics_list'%}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'gallery:pics_list'%}" method="post" enctype="multipart/form-data" id="upload_form">
         {% csrf_token %}
         <input type="text" id="file_title" name="title" value="title">
         <input type="file" id="image_path" name="image_path">

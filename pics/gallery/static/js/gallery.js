@@ -2,7 +2,6 @@ var api_urls = {
   'pictures': 'api/pictures/',
 }
 
-
 function reload_gallery() {
   $.ajax({
     url: api_urls['pictures'],
@@ -11,24 +10,28 @@ function reload_gallery() {
       format: "json",
     },
     success: function(response) {
-      $('.image').remove();
+      $('.picrureBox').remove();
       $.each(response, function(k,v){
-        $(`<div class="image">
-          <img src='${v.image_path}' alt=${v.title}/>
-          <h4>${v.title}
-          </h4>
+        $(`<div class="picrureBox">
+            <img src='${v.image_path}' alt=${v.title}/>
+            <h4>${v.id}</h4>
+            Your note: <input id="note_${v.id}" type = "text" value="${v.note.text}"><button href="${api_urls['pictures']}${v.id}" class="delete_img">Save note</button>
+            <ul>
+              <li><a href="${api_urls['pictures']}${v.id}">Details</a></li>
+              <li><button href="${api_urls['pictures']}${v.id}" class="delete_img">Delete</button></li>
+            <ul>
           </div>`).appendTo('#picturesContainer')
       })
 
     },
     error: function(xhr) {
-      //Do Something to handle error
+      console.log(xhr)
     }
 })};
 
 $('#apply_filter').on('click', function() {reload_gallery()});
 
-$(document).ready(function(){reload_gallery()})
+
 $('.upload_btn').on('click', function() {
   var fd = new FormData(); 
   var files = $('#image_path')[0].files[0];
@@ -44,15 +47,23 @@ $('.upload_btn').on('click', function() {
     contentType: false, 
     processData: false, 
     success: function(response){ 
-        if(response != 0){ 
-           alert('file uploaded'); 
-        } 
-        else{ 
-            alert('file not uploaded'); 
-        } 
+      if(response != 0){ 
+        alert('file uploaded');
+        $('#upload_form').trigger('reset')
+        reload_gallery()
+      } 
+      else{ 
+        alert('file not uploaded'); 
+      } 
     }, 
     
   })
+});
 
+$('.delete_img').click(function(){
+  console.log(123)
+});
+
+$(document).ready(function(){
   reload_gallery()
 });

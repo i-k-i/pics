@@ -18,9 +18,6 @@ class PictureSerializer(serializers.ModelSerializer):
         serializer = NoteSerializer(instance = query_set)
         return serializer.data
 
-    # def save(self, *args, **kwargs):
-    #     import ipdb; ipdb.set_trace()
-
     class Meta:
         model = models.Picture
         fields = ('id', 'image_path', 'note', 'user', 'title')
