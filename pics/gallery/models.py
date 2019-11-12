@@ -14,6 +14,10 @@ class Picture(models.Model):
     def __str__(self):
         return  self.title or self.image_path
 
+
+    # def save(self, *args, **kwargs):
+    #     import ipdb; ipdb.set_trace()
+
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='created_notes')
     picture = models.ForeignKey(Picture, on_delete = models.CASCADE, related_name='notes')

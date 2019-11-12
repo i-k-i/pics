@@ -6,7 +6,7 @@ from django.contrib.auth import login
 
 def pictures_list(request):
     pictures = Picture.objects.all()
-    return render(request, 'gallery/pics_list.html', {'pictures': pictures}) 
+    return render(request, 'gallery/gallery.html', {'pictures': pictures}) 
 
 def send_gallery_to_email(request):
     pass

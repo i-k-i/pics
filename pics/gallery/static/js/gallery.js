@@ -1,22 +1,19 @@
 var api_urls = {
-  'pics_list': 'api/pictures/list',
-  'pics': 'api/pictures/',
+  'pictures': 'api/pictures/',
 }
 
 
-
-
-
-function update_pictures() {
+function reload_gallery() {
   $.ajax({
-    url: api_urls['pics_list'],
+    url: api_urls['pictures'],
     type: "get",
     data: { 
       format: "json",
     },
     success: function(response) {
+      $('.image').remove();
       $.each(response, function(k,v){
-        $(`<div className="image">
+        $(`<div class="image">
           <img src='${v.image_path}' alt=${v.title}/>
           <h4>${v.title}
           </h4>
@@ -29,6 +26,33 @@ function update_pictures() {
     }
 })};
 
-$('#apply_filter').on('click', function() {update_pictures()});
+$('#apply_filter').on('click', function() {reload_gallery()});
 
-$(document).ready(function(){update_pictures()})
+$(document).ready(function(){reload_gallery()})
+$('.upload_btn').on('click', function() {
+  var fd = new FormData(); 
+  var files = $('#image_path')[0].files[0];
+  var title = $('#title')[0]
+  var csrftoken = $("[name=csrfmiddlewaretoken]")[0].value
+  fd.append('image_path', files);
+  fd.append('title', title)
+  fd.append('csrfmiddlewaretoken', csrftoken)
+  $.ajax({
+    url: api_urls['pictures'], 
+    type: 'post', 
+    data: fd, 
+    contentType: false, 
+    processData: false, 
+    success: function(response){ 
+        if(response != 0){ 
+           alert('file uploaded'); 
+        } 
+        else{ 
+            alert('file not uploaded'); 
+        } 
+    }, 
+    
+  })
+
+  reload_gallery()
+});

@@ -1,5 +1,5 @@
-from django.urls import path
-from . import views, api
+from django.urls import path, include
+from . import views
 from django.contrib.auth import views as auth_views
 
 app_name = 'gallery'
@@ -13,6 +13,6 @@ urlpatterns = [
 
     path('send_gallery/', views.send_gallery_to_email, name = 'send_gallery'),
 
-    path('api/pictures/list', api.PictureList.as_view(), name  = 'api_pics_list'),
-    path('api/pictures/<int:pk>/', api.PictureDetail.as_view(), name  = 'api_pics'),
+    path ('api/', include('gallery.api_urls'))
+    
 ]
