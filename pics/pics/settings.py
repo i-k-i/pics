@@ -140,24 +140,6 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler'
-#         },
-#     },
-#     'loggers': {
-#         '': {  # 'catch all' loggers by referencing it with the empty string
-#             'handlers': ['console'],
-#             'level': 'DEBUG',
-#         },
-#     },
-# }
-
-
 CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
 CELERY_IMPORTS = ('worker.tasks', )
 CELERY_TASK_SERIALIZER = 'json'

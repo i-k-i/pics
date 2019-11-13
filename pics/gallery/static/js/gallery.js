@@ -45,6 +45,7 @@ function reload_gallery() {
 
     },
     error: function(xhr) {
+      $('.picrureBox').remove();
       console.log(xhr)
     }
 })};
@@ -69,14 +70,17 @@ $('.upload_btn').on('click', function() {
       if(response != 0){ 
         alert('file uploaded');
         $('#upload_form').trigger('reset')
-        reload_gallery()
       } 
       else{ 
         alert('file not uploaded'); 
       } 
-    }, 
+    },
+    error: function (response) {
+      console.log(response)
+    }  
     
   })
+  reload_gallery()
 })
  
   $(document).ready(function(){

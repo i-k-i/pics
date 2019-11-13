@@ -8,11 +8,6 @@ def pictures_list(request):
     pictures = Picture.objects.all()
     return render(request, 'gallery/gallery.html', {'pictures': pictures}) 
 
-def send_gallery_to_email(request):
-    send_pictures_to_email.apply_async()
-
-    return redirect('gallery:home')
-
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -26,6 +21,11 @@ def register(request):
         user_form = UserRegistrationForm()
     return render(request,'account/register.html',{'user_form': user_form})
 
+def send_gallery_to_email(request):
+    #NOT IMPLEMENTED
+    send_pictures_to_email.apply_async()
+
+    return redirect('gallery:home')
 
 
 

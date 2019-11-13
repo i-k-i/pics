@@ -30,9 +30,3 @@ class PictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Picture
         fields = ('id', 'image_path', 'note', 'user', 'title')
-
-        # extra_kwargs = {
-        #     'user': {
-        #         'required': False, 
-        #     }
-        # }
