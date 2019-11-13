@@ -4,28 +4,22 @@
 {% block title %}Pictures{% endblock %}
 {% block content %}
     <h1>Some Pictures</h1>
-    <div id="filter_form">
-        User_id <input type="text" name="user">
-        Commented <input type="checkbox" name="commented">
-        <input id="apply_filter" type="button" value="Filter">
+    <div id="filter_form" class="upload">
+        <input placeholder="User_id" type="text" name="user" id="filter_user">
+        <button id="apply_filter" type="button">Filter</button>
     </div>
 {% if request.user.is_authenticated %}
-    <form action="{% url 'gallery:pics_list'%}" method="post" enctype="multipart/form-data" id="upload_form">
+    <form class="upload" action="{% url 'gallery:pics_list'%}" method="post" enctype="multipart/form-data" id="upload_form">
         {% csrf_token %}
-        <input type="text" id="file_title" name="title" value="title">
+        <input type="text" id="title" name="title" value="title">
         <input type="file" id="image_path" name="image_path">
-        <input class="upload_btn" type="button" value="Upload">
+        <button class="upload_btn" type="button">Upload</button>
     </form>    
 {%endif%}
 <div id="picturesContainer"></div>
-
 {% endblock %}
 
 {% block srv %}
-
-    <script>
-    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{% static '/js/gallery.js' %}"></script>
-        
 {% endblock %}

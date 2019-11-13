@@ -6,23 +6,24 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/gallery.css' %}">
     </head>
     <body>
-        <div id="bar">
-            <ul>
+        <header>
+            <nav>
                 {% if request.user.is_authenticated %}
-                <li>{{ user }}</li>
-                <li><a href="{% url 'gallery:logout' %}">Logout</a></li>
-                <li><a href="{% url 'gallery:send_gallery' %}">Send me this pictures</a></li>
+                {{ user }}
+                <a href="{% url 'gallery:logout' %}">Logout</a>
+                <a href="{% url 'gallery:send_gallery' %}">Send me this pictures</a>
                 {%else%}
-                <li><a href="{% url 'gallery:login' %}">login</a></li>
-                <li><a href="{% url 'gallery:register' %}">register</a></li>
-                
+                <a href="{% url 'gallery:login' %}">login</a>
+                <a href="{% url 'gallery:register' %}">register</a>
                 {% endif %}
-            </ul>
-        </div>
-        <div id="content">
+            </nav>
+        </header>
+        <section id="content">
             {% block content %}{% endblock %}
-        </div>
-        {% block srv %}{% endblock %}
+         </section>
+          {% block srv %}{% endblock %}
     </body>
-</html>
-        
+    </html>
+    
+
+    

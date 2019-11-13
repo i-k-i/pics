@@ -2,14 +2,16 @@ from django.shortcuts import render, redirect
 from .models import Picture
 from .forms import UserRegistrationForm
 from django.contrib.auth import login
-
+from worker.tasks import send_pictures_to_email
 
 def pictures_list(request):
     pictures = Picture.objects.all()
     return render(request, 'gallery/gallery.html', {'pictures': pictures}) 
 
 def send_gallery_to_email(request):
-    pass
+    send_pictures_to_email.apply_async()
+
+    return redirect('gallery:home')
 
 def register(request):
     if request.method == 'POST':

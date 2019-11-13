@@ -3,24 +3,44 @@ var api_urls = {
 }
 
 function reload_gallery() {
+  var user = $('#filter_user')[0].value
   $.ajax({
     url: api_urls['pictures'],
     type: "get",
     data: { 
       format: "json",
+      user: user
     },
     success: function(response) {
       $('.picrureBox').remove();
       $.each(response, function(k,v){
-        $(`<div class="picrureBox">
-            <img src='${v.image_path}' alt=${v.title}/>
-            <h4>${v.id}</h4>
-            Your note: <input id="note_${v.id}" type = "text" value="${v.note.text}"><button href="${api_urls['pictures']}${v.id}" class="delete_img">Save note</button>
-            <ul>
-              <li><a href="${api_urls['pictures']}${v.id}">Details</a></li>
-              <li><button href="${api_urls['pictures']}${v.id}" class="delete_img">Delete</button></li>
-            <ul>
-          </div>`).appendTo('#picturesContainer')
+        $(
+          
+        `
+        <div class="item picrureBox">
+          <div class="image">
+            <img src="${v.image_path}" alt="${v.title}" />
+          </div>
+        <div class="form">
+        
+        <div class="form-item">
+              Owner: ${v.user.username}(${v.user.id}) Pic_id:<a href="${api_urls['pictures']}${v.id}">${v.id}</a>
+          </div>
+          <div class="form-item">
+          <input placeholder="Your note" id="note_${v.id}" type="text" value="${v.note.text}">
+          <button href="${api_urls['pictures']}${v.id}" >
+          Save note
+          </button>
+          </div>
+          <footer>
+            <button href="${api_urls['pictures']}${v.id} class="delete_img delete">Delete</button>
+          </footer>
+          </div>
+          </div>
+
+          `          
+          
+          ).appendTo('#picturesContainer')
       })
 
     },
@@ -31,11 +51,10 @@ function reload_gallery() {
 
 $('#apply_filter').on('click', function() {reload_gallery()});
 
-
 $('.upload_btn').on('click', function() {
   var fd = new FormData(); 
   var files = $('#image_path')[0].files[0];
-  var title = $('#title')[0]
+  var title = $('#title')[0].value
   var csrftoken = $("[name=csrfmiddlewaretoken]")[0].value
   fd.append('image_path', files);
   fd.append('title', title)
@@ -58,17 +77,8 @@ $('.upload_btn').on('click', function() {
     }, 
     
   })
-});
-
-// $('.delete_img').click(function(){
-//   console.log(123)
-// });
-
-
-$('#apply_filter').on('click', function(){
-  
 })
-
-$(document).ready(function(){
-  reload_gallery()
+ 
+  $(document).ready(function(){
+    reload_gallery()
 });
